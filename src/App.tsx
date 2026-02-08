@@ -1,35 +1,135 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { motion, useReducedMotion } from "framer-motion";
+import GradientText from "./components/GradientText";
+import TextType from "./components/TextType";
+import GitHubContrib from "./components/ChartGitHub";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  useReducedMotion() ?? false;
+
+  const content = {
+    name: "Logan Hindley",
+    location: "Edmonton, AB",
+    tagline: "I build whatever comes to mind, and always looking to join hackathons!",
+    links: {
+      github: "https://github.com/logie87",
+      linkedin: "https://www.linkedin.com/in/loganhindley/",
+      email: "mailto:lhindley@ualberta.ca",
+      resume: "https://docs.google.com/document/d/1OWb428YVy725HeaPIZVizyFydH1pgBG0jaVzwGHzuhQ/edit?usp=sharing",
+    },
+  };
+
+  const links = [
+    { label: "GitHub", href: content.links.github, icon: Github },
+    { label: "LinkedIn", href: content.links.linkedin, icon: Linkedin },
+    { label: "Email", href: content.links.email, icon: Mail },
+    { label: "Resume", href: content.links.resume, icon: FileText }
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <main className="main">
+        <section className="hero">
+          <motion.p
+            className="kicker"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            {content.location}
+          </motion.p>
 
-export default App
+          <motion.h1
+            className="h1"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.05 }}
+          >
+            <GradientText
+              colors={["#4f7a28", "#587a5d", "#ffffff", "#74a7fe", "#3a88fe"]}
+              animationSpeed={5}
+              direction="diagonal"
+              pauseOnHover
+              className="nameGradient"
+              showBorder={false}
+            >
+              {content.name}
+            </GradientText>
+          </motion.h1>
+
+          <motion.h2
+            className="h2"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.12 }}
+          >
+            <TextType
+              as="span"
+              className="titleType"
+              text={[
+                "Computer Science Student",
+                "Software Engineer",
+                "Videographer",
+                "Caffeine Addict",
+                "Tech Enthusiast",
+                "Builder of Things"
+              ]}
+              smartDelete
+              loop
+              pauseDuration={1800}
+              initialDelay={250}
+              typingSpeed={80}
+              deletingSpeed={55}
+              variableSpeed={{ min: 30, max: 100 }}
+              cursorCharacter="▎"
+            />
+          </motion.h2>
+
+          <motion.p
+            className="tagline"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.18 }}
+          >
+            {content.tagline}
+          </motion.p>
+
+          <motion.div
+            className="iconRow"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.24 }}
+          >
+            {links.map((l) => {
+              const Icon = l.icon;
+              return (
+                <a
+                  key={l.label}
+                  className="iconBtn"
+                  href={l.href}
+                  target={l.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  aria-label={l.label}
+                  title={l.label}
+                >
+                  <Icon size={24} />
+                </a>
+              );
+            })}
+          </motion.div>
+        </section>
+
+        <section className="about">
+          <div className="gitalign">
+            <h5>GitHub Activity</h5>
+            <GitHubContrib username="logie87" />
+          </div>
+        </section>
+
+        <footer className="footer">
+          <span className="muted">© {new Date().getFullYear()} Logan Hindley</span>
+        </footer>
+      </main>
+    </div>
+  );
+}
