@@ -18,12 +18,30 @@ body {
 .app {
   min-height: 100vh;
   width: 100%;
+  position: relative;
+}
+
+.silkBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.silkCanvas {
+  width: 100%;
+  height: 100%;
 }
 
 .main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero Section */
@@ -103,42 +121,28 @@ body {
   transform: translateY(-2px);
 }
 
-/* About Section */
-.about {
-  padding: 4rem 0;
+/* GitHub Section */
+.githubSection {
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 800px;
   display: flex;
   justify-content: center;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 800px;
-  width: 100%;
-}
-
-.card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #e9e9ef;
 }
 
 /* GitHub Calendar Wrapper */
 .ghCalWrap {
   width: 100%;
   overflow-x: auto;
+  background: transparent;
+  display: flex;
+  justify-content: center;
 }
 
 .ghCalInner {
   min-width: fit-content;
 }
 
-.gitalign {
-  padding-bottom: 100px;
-
-}
 /* Footer */
 .footer {
   text-align: center;

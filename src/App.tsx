@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import GradientText from "./components/GradientText";
 import TextType from "./components/TextType";
 import GitHubContrib from "./components/ChartGitHub";
+import Silk from "./components/Silk.tsx";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
 export default function App() {
@@ -28,6 +29,17 @@ export default function App() {
 
   return (
     <div className="app">
+      <div className="silkBg">
+        <Silk
+          speed={3}
+          scale={2}
+          color="#0a0f0d"
+          noiseIntensity={1.8}
+          rotation={0.3}
+          className="silkCanvas"
+        />
+      </div>
+
       <main className="main">
         <section className="hero">
           <motion.p
@@ -117,13 +129,15 @@ export default function App() {
               );
             })}
           </motion.div>
-        </section>
 
-        <section className="about">
-          <div className="gitalign">
-            <h5>GitHub Activity</h5>
+          <motion.div
+            className="githubSection"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.3 }}
+          >
             <GitHubContrib username="logie87" />
-          </div>
+          </motion.div>
         </section>
 
         <footer className="footer">
