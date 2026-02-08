@@ -11,7 +11,7 @@ export default function App() {
   const content = {
     name: "Logan Hindley",
     location: "Edmonton, AB",
-    tagline: "I build whatever comes to mind, and always looking to join hackathons!",
+    tagline: "Building cool things with cool people, and drinking a lot of coffee while I'm at it!",
     links: {
       github: "https://github.com/logie87",
       linkedin: "https://www.linkedin.com/in/loganhindley/",
