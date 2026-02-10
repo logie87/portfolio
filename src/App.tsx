@@ -31,7 +31,7 @@ export default function App() {
     <div className="app">
       <div className="silkBg">
         <Silk
-          speed={3}
+          speed={5}
           scale={1.5}
           color="#0a0b0fc0"
           noiseIntensity={1.0}
