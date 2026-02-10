@@ -134,7 +134,7 @@ export default function App() {
             className="githubSection"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.3 }}
+            transition={{ duration: 0.65, delay: 0.7 }}
           >
             <GitHubContrib username="logie87" />
           </motion.div>

@@ -26,15 +26,15 @@ export default function GitHubContrib({ username }: Props) {
           showColorLegend={true}
           showWeekdayLabels={false}
           showMonthLabels={true}
-          blockSize={15}
+          blockSize={16}
           blockMargin={5}
           fontSize={12}
           theme={{
             dark: [
-              "rgba(255,255,255,0.06)",   // empty
-              "rgba(99,179,255,0.18)",    // low  
-              "rgba(64,156,255,0.34)",    // mid
-              "rgba(34, 148, 255, 0.55)",    // high
+              "rgba(255, 255, 255, 0.05)",   // empty
+              "rgba(99, 180, 255, 0.24)",    // low  
+              "rgba(64, 156, 255, 0.41)",    // mid
+              "rgba(34, 148, 255, 0.45)",    // high
               "rgba(0, 185, 236, 0.7)",     // peak  
             ],
           }}
