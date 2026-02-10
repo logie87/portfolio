@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import GradientText from "./components/GradientText";
 import TextType from "./components/TextType";
 import GitHubContrib from "./components/ChartGitHub";
-import Silk from "./components/Silk.tsx";
+import Silk from "./components/Silk";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
 export default function App() {

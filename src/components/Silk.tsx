@@ -1,14 +1,13 @@
-/* eslint-disable react/no-unknown-property */
-import React, { forwardRef, useMemo, useRef, useLayoutEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import type { RootState } from '@react-three/fiber';
-import { Color, Mesh, ShaderMaterial } from 'three';
-import type { IUniform } from 'three';
+import React, { forwardRef, useMemo, useRef, useLayoutEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import type { RootState } from "@react-three/fiber";
+import { Color, Mesh, ShaderMaterial } from "three";
+import type { IUniform } from "three";
 
 type NormalizedRGB = [number, number, number];
 
 const hexToNormalizedRGB = (hex: string): NormalizedRGB => {
-  const clean = hex.replace('#', '');
+  const clean = hex.replace("#", "");
   const r = parseInt(clean.slice(0, 2), 16) / 255;
   const g = parseInt(clean.slice(2, 4), 16) / 255;
   const b = parseInt(clean.slice(4, 6), 16) / 255;
@@ -80,8 +79,8 @@ void main() {
                                    0.02 * tOffset) +
                            sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
 
-  vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
-  col.a = 1.0;
+  vec3 colorRGB = uColor * pattern;
+  float noiseVal = rnd / 15.0 * uNoiseIntensity;
   gl_FragColor = col;
 }
 `;
@@ -90,7 +89,10 @@ interface SilkPlaneProps {
   uniforms: SilkUniforms;
 }
 
-const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
+const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane(
+  { uniforms },
+  ref,
+) {
   const { viewport } = useThree();
 
   useLayoutEffect(() => {
@@ -113,11 +115,15 @@ const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms
   return (
     <mesh ref={ref}>
       <planeGeometry args={[1, 1, 1, 1]} />
-      <shaderMaterial uniforms={uniforms} vertexShader={vertexShader} fragmentShader={fragmentShader} />
+      <shaderMaterial
+        uniforms={uniforms}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+      />
     </mesh>
   );
 });
-SilkPlane.displayName = 'SilkPlane';
+SilkPlane.displayName = "SilkPlane";
 
 export interface SilkProps {
   speed?: number;
@@ -128,13 +134,13 @@ export interface SilkProps {
   className?: string;
 }
 
-const Silk: React.FC<SilkProps> = ({ 
-  speed = 5, 
-  scale = 1, 
-  color = '#0a0f0d', 
-  noiseIntensity = 1.5, 
+const Silk: React.FC<SilkProps> = ({
+  speed = 5,
+  scale = 1,
+  color = "#0a0f0d",
+  noiseIntensity = 1.5,
   rotation = 0,
-  className = ''
+  className = "",
 }) => {
   const meshRef = useRef<Mesh>(null);
 
@@ -145,14 +151,24 @@ const Silk: React.FC<SilkProps> = ({
       uNoiseIntensity: { value: noiseIntensity },
       uColor: { value: new Color(...hexToNormalizedRGB(color)) },
       uRotation: { value: rotation },
-      uTime: { value: 0 }
+      uTime: { value: 0 },
     }),
-    [speed, scale, noiseIntensity, color, rotation]
+    [speed, scale, noiseIntensity, color, rotation],
   );
 
   return (
-    <div className={className}>
-      <Canvas dpr={[1, 2]} frameloop="always">
+    <div className={className} style={{ width: "100%", height: "100%" }}>
+      <Canvas
+        dpr={[1, 2]}
+        frameloop="always"
+        gl={{
+          antialias: false,
+          alpha: false,
+          powerPreference: "high-performance",
+        }}
+        camera={{ position: [0, 0, 1] }}
+        style={{ display: "block" }}
+      >
         <SilkPlane ref={meshRef} uniforms={uniforms} />
       </Canvas>
     </div>
