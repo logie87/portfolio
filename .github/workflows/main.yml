@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: portfolio/package-lock.json
+          cache-dependency-path: /package-lock.json
 
       - name: Install
         working-directory: portfolio
@@ -36,7 +36,7 @@ jobs:
         working-directory: portfolio
         run: npm run build
         env:
-          BASE_PATH: /logie87/
+          BASE_PATH: /portfolio/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
