@@ -81,7 +81,7 @@ void main() {
 
   vec3 colorRGB = uColor * pattern;
   float noiseVal = rnd / 15.0 * uNoiseIntensity;
-  gl_FragColor = col;
+  gl_FragColor = vec4(colorRGB + noiseVal, 1.0);
 }
 `;
 

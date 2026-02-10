@@ -32,9 +32,9 @@ export default function App() {
       <div className="silkBg">
         <Silk
           speed={3}
-          scale={2}
-          color="#0a0f0d"
-          noiseIntensity={1.8}
+          scale={1.5}
+          color="#0a0b0fc0"
+          noiseIntensity={1.0}
           rotation={0.3}
           className="silkCanvas"
         />
