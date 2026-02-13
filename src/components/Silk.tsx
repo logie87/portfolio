@@ -155,7 +155,6 @@ const Silk: React.FC<SilkProps> = ({
     }),
     [speed, scale, noiseIntensity, color, rotation],
   );
-
   return (
     <div className={className} style={{ width: "100%", height: "100%" }}>
       <Canvas
